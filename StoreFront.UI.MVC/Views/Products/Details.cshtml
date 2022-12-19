@@ -1,66 +1,152 @@
 ﻿@model StoreFront.DATA.EF.Models.Product
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.ProductName + "Details" ;
+
+   
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsDiscontinued)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsDiscontinued)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductCount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductCount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductImage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductImage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UnitsOnOrder)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UnitsOnOrder)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
-    </dl>
+
+@section breadcrumbs{
+    <section class="breadcrumb_part single_product_breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <h2>@ViewData["Title"]</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+    <!--================Single Product Area =================-->
+    <div class="product_image_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="product_img_slide owl-carousel">
+                        <div class="single_product_img">
+                            <img src="~/img/@Html.DisplayFor(model => model.ProductImage)" alt="#" class="img-fluid">
+                            @*<img src="~/img/product/single_product.png" alt="#" class="img-fluid">*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="single_product_text text-center">
+                        <h3>
+                            @Html.DisplayFor(model => model.ProductName)
+                        </h3>
+                        <p>
+                            @Html.DisplayFor(model => model.ProductDescription)
+                        </p>
+                        <div class="card_area">
+                            @*<div class="product_count_area">
+                                <p>Quantity</p>
+                                <div class="product_count d-inline-block">
+                                    <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+                                    <input class="product_count_item input-number" type="text" value="1" min="0" max="10">
+                                    <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                </div>
+                                <p>
+                                    @Html.DisplayFor(model => model.ProductPrice)
+                                </p>
+                            </div>*@
+                            <div class="add_to_cart">
+                                <a asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@Model.ProductId" class="btn_3">
+                                    Add To Cart 
+                                </a>
+                            </div>
+                        </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <p>
+                            @{
+                                string lineText = Model.IsDiscontinued ? "Yes" : "No";
+                            }
+                            Discontinued?: <strong>@lineText</strong>
+                            <br />
+                            @{
+                                int unitsInStock = Model.ProductCount == null ? 0 : (int)Model.ProductCount;
+                            }
+                            # In Stock: <strong>@unitsInStock</strong>
+                            <br />
+                            Category: <strong>@Model.Category.CategoryName</strong>
+                        </p>
+
+                    }
+                    <br />
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn_3">Edit</a>
+
+                        }
+                        <a asp-action="Index" class="btn_1">Back to Shop</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@Model?.ProductId" class="btn_3">Delete</a>
+                        }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<!--================End Single Product Area =================-->
+@* <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductDescription)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsDiscontinued)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsDiscontinued)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductCount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductCount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductPrice)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductPrice)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductImage)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductImage)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UnitsOnOrder)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UnitsOnOrder)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Category.CategoryName)
+            </dd>
+        </dl>
+    </div>*@
+

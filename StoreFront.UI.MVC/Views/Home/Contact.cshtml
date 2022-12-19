@@ -1,0 +1,139 @@
+﻿@model StoreFront.UI.MVC.Models.ContactViewModel
+
+@{
+    ViewData["Title"] = "Contact Us!";
+}
+
+<!-- breadcrumb part start-->
+<section class="breadcrumb_part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <h2>@ViewData["Title"]</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb part end-->
+<!-- ================ contact section start ================= -->
+<section class="contact-section section_padding">
+    <div class="container">
+        @*        <div class="d-none d-sm-block mb-5 pb-4"> *@
+        <div class="row">
+            <div class="col-lg-12">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d396368.6856205144!2d-94.8558995806724!3d39.09211671598037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87c0f75eafe99997%3A0x558525e66aaa51a2!2sKansas%20City%2C%20MO!5e0!3m2!1sen!2sus!4v1670878479270!5m2!1sen!2sus"width="" height="450" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        @*<script>
+        function initMap() {
+        var uluru = {
+        lat: -25.363,
+        lng: 131.044
+        };
+        var grayStyles = [{
+        featureType: "all",
+        stylers: [{
+        saturation: -90
+        },
+        {
+        lightness: 50
+        }
+        ]
+        },
+        {
+        elementType: 'labels.text.fill',
+        stylers: [{
+        color: '#ccdee9'
+        }]
+        }
+        ];
+        var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+        lat: -31.197,
+        lng: 150.744
+        },
+        zoom: 9,
+        styles: grayStyles,
+        scrollwheel: false
+        });
+        }
+        </script>*@
+        @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
+        </script>*@
+        @*        </div>
+        *@
+
+        <div class="row">
+            <div class="col-12">
+                <h2 class="contact-title">Get in Touch</h2>
+            </div>
+            <div class="col-lg-8">
+                <form asp-action="Contact" class="form-contact contact_form" id="contactForm">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+
+                                <textarea asp-for="Message" class="form-control w-100" id="message" cols="30" rows="9"
+                                          placeholder='Enter Message'></textarea>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input asp-for="Name" class="form-control" id="name" type="text"
+                                       placeholder='Enter your name'>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input asp-for="Email" class="form-control" id="email" type="email" placeholder='Enter email address'>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input asp-for="Subject" class="form-control" id="subject" type="text" placeholder='Enter Subject'>
+                                <span asp-validation-for="Subject" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn_3">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4">
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-home"></i></span>
+                    <div class="media-body">
+                        <h3>Buttonwood, California.</h3>
+                        <p>Rosemead, CA 91770</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                    <div class="media-body">
+                        <h3>00 (440) 9865 562</h3>
+                        <p>Mon to Fri 9am to 6pm</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-email"></i></span>
+                    <div class="media-body">
+                        <h3>support@colorlib.com</h3>
+                        <p>Send us your query anytime!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ contact section end ================= -->

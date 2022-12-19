@@ -1,77 +1,107 @@
-﻿@model IEnumerable<StoreFront.DATA.EF.Models.Product>
-
+﻿@model IPagedList<StoreFront.DATA.EF.Models.Product>
+@using X.PagedList.Mvc.Core
+@using X.PagedList
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Shop Tile";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDiscontinued)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitsOnOrder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDiscontinued)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-            </td>
-        </tr>
+
+@section breadcrumbs{
+    <section class="breadcrumb_part">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <h2>Shop</h2>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+
+
+                            <p class="text-center">
+
+                                <a asp-action="Create" class="btn_1">Create New</a>
+
+                            </p>
+                        }
+                        <p class="text-center">
+
+                            <a asp-action="ListProducts" class="btn_1">List View</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 }
-    </tbody>
-</table>
+    <!-- breadcrumb part end-->
+    <!-- product list part start-->
+    <section class="product_list section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product_sidebar">
+                        <form asp-action="Index" method="get">
+                            <div class="single_sedebar">
+                                <input type="text" name="searchTerm" placeholder="Search Keyword" />
+                                <i class="ti-search"></i>
+                            </div>
+                            <div class="single_sedebar">
+                                <div class="select_option">
+                                    <select name="categoryId" class="select_option_list" asp-items="ViewBag.CategoryId">
+                                        <option value="0">Choose a Category</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single_sedebar">
+                                <input type="Submit" value="Go"/>
+                            </div>
+                        </form>
+                    @if (ViewBag.NbrResults != null)
+                    {
+                        <p class="mt-5 p-2 alert-warning text-center">
+                            Showing @ViewBag.NbrResults result@(ViewBag.NbrResults > 1 ? "s" : "") for '@ViewBag.SearchTerm'
+                        </p>
+                    }
+                    
+                    <div class="w-50 mx-auto text-center">
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    </div>
+                    <div class="col-12 mb-3">
+                        @Html.PagedListPager(
+                        Model,
+                        page => Url.Action("Index",
+                        new{ page, searchTerm = ViewBag.SearchTerm, categoryId = ViewBag.Category})
+                        )
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-8">
+                <div class="product_list">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_product_item">
+                                    <a asp-action="Details" asp-route-id="@item.ProductId">
+                                        <img src="~/img/@Html.DisplayFor(modelItem => item.ProductImage)" alt="@item.ProductName" style="img-fluid" style="max-height:200px; max-width: 300px;" />
+                                        <h3>
+                                            @Html.DisplayFor(modelItem => item.ProductName)
+                                        </h3>
+                                        <p>
+                                            @Html.DisplayFor(modelItem => item.ProductPrice)
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+</section>

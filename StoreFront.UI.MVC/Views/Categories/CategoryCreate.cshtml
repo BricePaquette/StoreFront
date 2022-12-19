@@ -1,0 +1,26 @@
+﻿@model StoreFront.DATA.EF.Models.Category
+
+<div class="row">
+    <div class="offset-md-3 col-md-6 offset-sm-1 col-sm-10 offset-xs-1 col-xs-10">
+        <form asp-action="CategoryCreate" method="post" id="CategoryCreateForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryDescription" class="control-label"></label>
+                <textarea asp-for="CategoryDescription" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="CategoryDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn_3" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

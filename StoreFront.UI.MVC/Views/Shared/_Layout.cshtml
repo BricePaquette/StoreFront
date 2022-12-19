@@ -1,11 +1,20 @@
-﻿<!doctype html>
+﻿@*
+    Added the two lines below to lock down certain nav items.
+    These are required to check the Authentication of a user (aka whether or not they are logged in)
+*@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject SignInManager<IdentityUser> signInManager
+
+<!doctype html>
 <html lang="zxx">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>pillloMart</title>
+    <title>@ViewData["Title"]</title>
     <link rel="icon" href="~/img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
@@ -22,8 +31,15 @@
     <link rel="stylesheet" href="~/css/magnific-popup.css">
     <!-- swiper CSS -->
     <link rel="stylesheet" href="~/css/slick.css">
+    <!-- DataTables.Net -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="~/css/style.css">
+    <!-- PagedList CSS -->
+    <link rel="stylesheet" href="~/css/PagedListStyles.css">
+    <!-- Custome CSS -->
+    <link rel="stylesheet" href="~/css/Custom.css">
+
 </head>
 
 <body>
@@ -45,9 +61,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
                                 </li>
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("About", "Home")">About</a>
-                                </li>
+                                </li>*@
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Index", "Products")">Product List</a>
                                 </li>
@@ -81,21 +97,57 @@
                                 </li>*@
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Conact", "Home")">Contact</a>
+                                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <a href="cart.html">
+                            @*<a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>*@
+                            <a href="@Url.Action("Index", "ShoppingCart")">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
+                                @{
+                                    //Create a bool variable to determine if there are items in the cart
+                                    bool cartHasProducts = false;
+
+                                    //Create an int to store the number of products
+                                    int productCount = 0;
+
+                                    //Check if the "cart" string exists in the session
+                                    if (!string.IsNullOrEmpty(Context.Session.GetString("cart")))
+                                    {
+                                        //If so, there are items in the cart -- flip the bool
+                                        cartHasProducts = true;
+
+                                        //Create the dictionaryu to hold the cart items
+                                        var products = new Dictionary<int, CartItemViewModel>();
+
+                                        //Deserialize the sessionCart and store in the Dictionary
+                                        products = JsonConvert.DeserializeObject<Dictionary<int, CartItemViewModel>>(Context.Session.GetString("cart"));
+
+                                        //Create a variable and assign the sum of the Qty of CartItems
+                                        productCount = products.Sum(x => x.Value.Qty);
+                                    }
+                                }
+                                @if (cartHasProducts)
+                                {
+                                    <sup style="
+                                                    color: white;
+                                                     background-color: red;
+                                                     border-radius: 60%;
+                                                     display: inline-block;
+                                                     text-align:center;
+                                                     height: 1em;
+                                                     padding: 1em;">
+                                        @productCount
+                                    </sup>
+                                }
                             </a>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box">
+        @*<div class="search_input" id="search_input_box">
             <div class="container">
                 <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -103,22 +155,15 @@
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-        </div>
+        </div>*@
     </header>
     <!-- Header part end-->
     @RenderSection("banner", false)
     <!-- breadcrumb part start-->
-    <section class="breadcrumb_part">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner">
-                        <h2>@ViewData["Title"]</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
+   @RenderSection("breadcrumbs", false)
+   @RenderSection("crudBreadcrumbs", false)
+    
     <!-- breadcrumb part end-->
     @RenderBody()
     <!--::footer_part start::-->
@@ -135,20 +180,18 @@
                                 <a href="@Url.Action("Index", "Home")">Home</a>
                                 <a href="@Url.Action("About", "Home")">About</a>
                                 <a href="@Url.Action("Index", "Products")">Products</a>
-                                <a href="#">Pages</a>
-                                <a href="blog.html">Blog</a>
                                 <a href="@Url.Action("Contact", "Home")">Contact</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    @*<div class="col-lg-4">
                         <div class="social_icon">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
                             <a href="#"><i class="fab fa-instagram"></i></a>
                             <a href="#"><i class="fab fa-google-plus-g"></i></a>
                             <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -163,10 +206,10 @@
                                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </P>
-                            <div class="copyright_link">
+                            @*<div class="copyright_link">
                                 <a href="#">Turms & Conditions</a>
                                 <a href="#">FAQ</a>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -184,18 +227,24 @@
     <script src="~/js/jquery.magnific-popup.js"></script>
     <!-- carousel js -->
     <script src="~/js/owl.carousel.min.js"></script>
-    <script src="~/js/jquery.nice-select.min.js"></script>
+    @*<script src="~/js/jquery.nice-select.min.js"></script>*@
     <!-- slick js -->
     <script src="~/js/slick.min.js"></script>
     <script src="~/js/jquery.counterup.min.js"></script>
     <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/contact.js"></script>
+    @*<script src="~/js/contact.js"></script>*@
     <script src="~/js/jquery.ajaxchimp.min.js"></script>
     <script src="~/js/jquery.form.js"></script>
     <script src="~/js/jquery.validate.min.js"></script>
     <script src="~/js/mail-script.js"></script>
     <!-- custom js -->
     <script src="~/js/custom.js"></script>
+    <!-- Datatables.net CDN -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <!-- AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @RenderSection("Scripts", false)
 </body>
 
 </html>

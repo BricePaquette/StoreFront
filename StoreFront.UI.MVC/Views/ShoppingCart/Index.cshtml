@@ -1,0 +1,133 @@
+﻿@model Dictionary<int, CartItemViewModel>
+@{
+    ViewData["Title"] = "Shopping Cart";
+
+    decimal? cartTotal = 0;
+
+
+}
+<!-- breadcrumb part start-->
+<section class="breadcrumb_part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <h2>@ViewData["Title"]</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb part end-->
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            @if (Model.Count == 0)
+            {
+                <p class="alert alert-warning text-center">
+                    @ViewBag.Message
+                </p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <form asp-action="UpdateCart">
+                                <tr>
+                                        @{
+
+                                            decimal? lineTotal = item.Value.Product.ProductPrice * item.Value.Qty;
+
+                                            cartTotal += item.Value.Product.ProductPrice * item.Value.Qty;
+                                        }
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="~/img/t_@item.Value.Product.ProductImage" alt="@item.Value.Product.ProductDescription" />
+                                            </div>
+                                            <div class="media-body">
+                                                <p>@item.Value.Product.ProductName</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>@string.Format($"{item.Value.Product.ProductPrice:c}")</h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+
+                                                @*<span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                    <input class="input-number" type="number" value="@item.Value.Qty" min="0" max="@item.Value.Product.ProductCount">
+                                    <span class="input-number-increment"> <i class="ti-plus"></i></span>*@
+                                            <input type="hidden" name="productId" value="@item.Key" />
+                                            <input type="number" name="qty" value="@item.Value.Qty" min="0" max="@item.Value.Product.ProductCount" class="input-number" />
+                                            
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>@string.Format($"{lineTotal:c}")</h5>
+                                    </td>
+                                </tr>
+                                <tr class="bottom_button">
+                                    <td>
+                                        <input type="submit" value="Update Cart" class="btn_1" />
+                                    </td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                            @*<div class="cupon_text float-right">
+                                <a class="btn_1" href="#">Close Coupon</a>
+                                </div>*@
+                                    </td>
+
+                                </tr>
+                                </form>
+                            }
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <h5>Subtotal</h5>
+                                    </td>
+                                    <td>
+
+                                        <h5>@string.Format($"{cartTotal:c}")</h5>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <div class="checkout_btn_inner float-right">
+                        <a class="btn_1" href="@Url.Action("Index", "Products")">Continue Shopping</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn_1" asp-action="SubmitOrder">Place Order</a>
+                        }
+                        else
+                        {
+
+                            <p class="alert alert-danger">To place this order you must be logged in</p>
+                            <button disabled="disabled" class="btn btn-primary">
+                                Place Order
+                            </button>
+
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+</section>
+<!--================End Cart Area =================-->

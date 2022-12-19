@@ -13,7 +13,12 @@ namespace StoreFront.DATA.EF.Models
         public string UserId { get; set; } = null!;
         public string UserFirstName { get; set; } = null!;
         public string UserLastName { get; set; } = null!;
-        public bool IsCrewmate { get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? Zip { get; set; }
+        public string? Phone { get; set; }
+        public string PlanetName { get; set; } = null!;
 
         public virtual ICollection<Order> Orders { get; set; }
     }

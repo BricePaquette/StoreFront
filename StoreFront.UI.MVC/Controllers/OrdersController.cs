@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using StoreFront.DATA.EF.Models;
 
 namespace StoreFront.UI.MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OrdersController : Controller
     {
         private readonly StoreFrontContext _context;
@@ -18,10 +20,11 @@ namespace StoreFront.UI.MVC.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var storeFrontContext = _context.Orders.Include(o => o.Location).Include(o => o.User);
+            var storeFrontContext = _context.Orders.Include(o => o.User);
             return View(await storeFrontContext.ToListAsync());
         }
 
@@ -34,7 +37,6 @@ namespace StoreFront.UI.MVC.Controllers
             }
 
             var order = await _context.Orders
-                .Include(o => o.Location)
                 .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
@@ -48,7 +50,6 @@ namespace StoreFront.UI.MVC.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Description");
             ViewData["UserId"] = new SelectList(_context.UserDetails, "UserId", "UserId");
             return View();
         }
@@ -58,7 +59,7 @@ namespace StoreFront.UI.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,UserId,LocationId,OrderDate")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderId,UserId,OrderDate")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +67,6 @@ namespace StoreFront.UI.MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Description", order.LocationId);
             ViewData["UserId"] = new SelectList(_context.UserDetails, "UserId", "UserId", order.UserId);
             return View(order);
         }
@@ -84,7 +84,6 @@ namespace StoreFront.UI.MVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Description", order.LocationId);
             ViewData["UserId"] = new SelectList(_context.UserDetails, "UserId", "UserId", order.UserId);
             return View(order);
         }
@@ -94,7 +93,7 @@ namespace StoreFront.UI.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,UserId,LocationId,OrderDate")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderId,UserId,OrderDate")] Order order)
         {
             if (id != order.OrderId)
             {
@@ -121,7 +120,6 @@ namespace StoreFront.UI.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Description", order.LocationId);
             ViewData["UserId"] = new SelectList(_context.UserDetails, "UserId", "UserId", order.UserId);
             return View(order);
         }
@@ -135,7 +133,6 @@ namespace StoreFront.UI.MVC.Controllers
             }
 
             var order = await _context.Orders
-                .Include(o => o.Location)
                 .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)

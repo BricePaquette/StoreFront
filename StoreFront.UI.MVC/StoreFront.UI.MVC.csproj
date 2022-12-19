@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\about.html" />
-    <Content Remove="wwwroot\blog.html" />
-    <Content Remove="wwwroot\cart.html" />
-    <Content Remove="wwwroot\checkout.html" />
-    <Content Remove="wwwroot\confirmation.html" />
-    <Content Remove="wwwroot\contact.html" />
-    <Content Remove="wwwroot\contact_process.php" />
     <Content Remove="wwwroot\css\all.css" />
     <Content Remove="wwwroot\css\animate.css" />
     <Content Remove="wwwroot\css\aos.css" />
@@ -33,7 +26,6 @@
     <Content Remove="wwwroot\css\style.map" />
     <Content Remove="wwwroot\css\swiper.min.css" />
     <Content Remove="wwwroot\css\themify-icons.css" />
-    <Content Remove="wwwroot\elements.html" />
     <Content Remove="wwwroot\fonts\Flaticon.eot" />
     <Content Remove="wwwroot\fonts\Flaticon.ttf" />
     <Content Remove="wwwroot\fonts\Flaticon.woff" />
@@ -215,7 +207,6 @@
     <Content Remove="wwwroot\img\tranding_item\tranding_item_4.png" />
     <Content Remove="wwwroot\img\tranding_item\tranding_item_5.png" />
     <Content Remove="wwwroot\img\tranding_item\tranding_item_6.png" />
-    <Content Remove="wwwroot\index.html" />
     <Content Remove="wwwroot\js\aos.js" />
     <Content Remove="wwwroot\js\bootstrap.min.js" />
     <Content Remove="wwwroot\js\cells-by-column.js" />
@@ -244,10 +235,6 @@
     <Content Remove="wwwroot\js\swiper_custom.js" />
     <Content Remove="wwwroot\js\theme.js" />
     <Content Remove="wwwroot\js\waypoints.min.js" />
-    <Content Remove="wwwroot\login.html" />
-    <Content Remove="wwwroot\main.html" />
-    <Content Remove="wwwroot\product_list.html" />
-    <Content Remove="wwwroot\readme.txt" />
     <Content Remove="wwwroot\sass\style.scss" />
     <Content Remove="wwwroot\sass\_about_us.scss" />
     <Content Remove="wwwroot\sass\_banner.scss" />
@@ -340,8 +327,6 @@
     <Content Remove="wwwroot\shop_doc\syntax-highlighter\styles\shThemeMDUltra.css" />
     <Content Remove="wwwroot\shop_doc\syntax-highlighter\styles\shThemeMidnight.css" />
     <Content Remove="wwwroot\shop_doc\syntax-highlighter\styles\shThemeRDark.css" />
-    <Content Remove="wwwroot\single-blog.html" />
-    <Content Remove="wwwroot\single-product.html" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.eot" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.svg" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.ttf" />
@@ -360,13 +345,36 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\about.html" />
-    <None Include="wwwroot\blog.html" />
-    <None Include="wwwroot\cart.html" />
-    <None Include="wwwroot\checkout.html" />
-    <None Include="wwwroot\confirmation.html" />
-    <None Include="wwwroot\contact.html" />
-    <None Include="wwwroot\contact_process.php" />
+    <None Include="Views\Categories\Create.cshtml" />
+    <None Include="Views\Categories\Delete.cshtml" />
+    <None Include="Views\Categories\Details.cshtml" />
+    <None Include="Views\Categories\Edit.cshtml" />
+    <None Include="Views\Categories\Index.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Orders\Create.cshtml" />
+    <None Include="Views\Orders\Delete.cshtml" />
+    <None Include="Views\Orders\Details.cshtml" />
+    <None Include="Views\Orders\Edit.cshtml" />
+    <None Include="Views\Orders\Index.cshtml" />
+    <None Include="Views\Products\Create.cshtml" />
+    <None Include="Views\Products\Delete.cshtml" />
+    <None Include="Views\Products\Details.cshtml" />
+    <None Include="Views\Products\Edit.cshtml" />
+    <None Include="Views\Products\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_OriginalLayout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\UserDetails\Create.cshtml" />
+    <None Include="Views\UserDetails\Delete.cshtml" />
+    <None Include="Views\UserDetails\Details.cshtml" />
+    <None Include="Views\UserDetails\Edit.cshtml" />
+    <None Include="Views\UserDetails\Index.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\css\all.css" />
     <None Include="wwwroot\css\animate.css" />
     <None Include="wwwroot\css\aos.css" />
@@ -385,7 +393,6 @@
     <None Include="wwwroot\css\style.map" />
     <None Include="wwwroot\css\swiper.min.css" />
     <None Include="wwwroot\css\themify-icons.css" />
-    <None Include="wwwroot\elements.html" />
     <None Include="wwwroot\fonts\Flaticon.eot" />
     <None Include="wwwroot\fonts\Flaticon.ttf" />
     <None Include="wwwroot\fonts\Flaticon.woff" />
@@ -567,7 +574,6 @@
     <None Include="wwwroot\img\tranding_item\tranding_item_4.png" />
     <None Include="wwwroot\img\tranding_item\tranding_item_5.png" />
     <None Include="wwwroot\img\tranding_item\tranding_item_6.png" />
-    <None Include="wwwroot\index.html" />
     <None Include="wwwroot\js\aos.js" />
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\cells-by-column.js" />
@@ -596,10 +602,6 @@
     <None Include="wwwroot\js\swiper_custom.js" />
     <None Include="wwwroot\js\theme.js" />
     <None Include="wwwroot\js\waypoints.min.js" />
-    <None Include="wwwroot\login.html" />
-    <None Include="wwwroot\main.html" />
-    <None Include="wwwroot\product_list.html" />
-    <None Include="wwwroot\readme.txt" />
     <None Include="wwwroot\sass\style.scss" />
     <None Include="wwwroot\sass\_about_us.scss" />
     <None Include="wwwroot\sass\_banner.scss" />
@@ -692,8 +694,6 @@
     <None Include="wwwroot\shop_doc\syntax-highlighter\styles\shThemeMDUltra.css" />
     <None Include="wwwroot\shop_doc\syntax-highlighter\styles\shThemeMidnight.css" />
     <None Include="wwwroot\shop_doc\syntax-highlighter\styles\shThemeRDark.css" />
-    <None Include="wwwroot\single-blog.html" />
-    <None Include="wwwroot\single-product.html" />
     <None Include="wwwroot\webfonts\fa-brands-400.eot" />
     <None Include="wwwroot\webfonts\fa-brands-400.svg" />
     <None Include="wwwroot\webfonts\fa-brands-400.ttf" />
@@ -713,14 +713,21 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
   </ItemGroup>
 
   <ItemGroup>

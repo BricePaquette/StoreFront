@@ -23,7 +23,6 @@ namespace StoreFront.DATA.EF.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
-        public virtual DbSet<Location> Locations { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderProduct> OrderProducts { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
@@ -34,7 +33,7 @@ namespace StoreFront.DATA.EF.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=StoreFront;trusted_Connection=true;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=StoreFront;Trusted_Connection=true;MultipleActiveResultSets=true;");
             }
         }
 
@@ -138,34 +137,37 @@ namespace StoreFront.DATA.EF.Models
                 entity.Property(e => e.CategoryName).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Location>(entity =>
-            {
-                entity.Property(e => e.LocationId).HasColumnName("LocationID");
-
-                entity.Property(e => e.CityName).HasMaxLength(50);
-
-                entity.Property(e => e.Description).HasMaxLength(500);
-
-                entity.Property(e => e.PlanetName).HasMaxLength(50);
-            });
-
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.LocationId).HasColumnName("LocationID");
-
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ShipCity)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShipPlanet)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShipState)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.ShipToName)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShipZip)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .IsFixedLength();
 
                 entity.Property(e => e.UserId)
                     .HasMaxLength(128)
                     .HasColumnName("UserID");
-
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.LocationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_Locations");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
@@ -228,9 +230,35 @@ namespace StoreFront.DATA.EF.Models
                     .HasMaxLength(128)
                     .HasColumnName("UserID");
 
+                entity.Property(e => e.Address)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(24)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlanetName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.State)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
                 entity.Property(e => e.UserFirstName).HasMaxLength(50);
 
                 entity.Property(e => e.UserLastName).HasMaxLength(50);
+
+                entity.Property(e => e.Zip)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .IsFixedLength();
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -1,0 +1,106 @@
+﻿.breadcrumb_part {
+    background-color: #C6402F;
+}
+
+.btn_1 {
+    background-color: #C6402F;
+    border: 2px solid #C6402F;
+}
+
+    .btn_1:hover {
+        background-color: #FFF;
+        color: #C6402F;
+    }
+
+.btn_3 {
+    color: #C6402F;
+    border: 2px solid #C6402F;
+}
+
+    .btn_3:hover {
+        background-color: #C6402F;
+        color: #FFF;
+    }
+
+a {
+    color: #2e2e2e;
+}
+
+    a:hover {
+        color: #C6402F;
+    }
+.footer_part .footer_iner .footer_menu_item a {
+    color: #2e2e2e;
+}
+.footer_part .footer_iner .footer_menu_item a:hover {
+    color: #C6402F;
+}
+.banner_part:after {
+    background-color: #C6402F;
+}
+
+.dropdown .dropdown-menu {
+    background-color: #C6402F;
+}
+
+    .dropdown .dropdown-menu .dropdown-item {
+        background-color: #C6402F;
+    }
+
+.client_review {
+    background-color: #5A5144;
+}
+
+    .client_review .client_img:after {
+        background-color: #C6402F;
+    }
+
+    .client_review .owl-nav button.owl-prev, .client_review .owl-nav button.owl-next {
+        border: 1px solid #C6402F;
+        color: #C6402F;
+    }
+
+        .client_review .owl-nav button.owl-prev:hover, .client_review .owl-nav button.owl-next:hover {
+            background-color: #C6402F;
+        }
+
+.product_sidebar .single_sedebar input {
+    background-color: #c2c2c2;
+    border: 1px solid #c2c2c2;
+    color: #555;
+}
+
+    .product_sidebar .single_sedebar input::placeholder {
+        color: #555;
+    }
+
+.select_option .select_option_list {
+    background-color: #c2c2c2;
+    border: 1px solid #c2c2c2;
+    color: #555;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.owl-carousel .owl-item img {
+    max-height: 650px;
+    object-fit: contain;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #c2c2c2;
+    border-color: #c2c2c2;
+}
+
+p{
+    color: #000;
+}
+.paginate_button .current {
+    background-color: #c2c2c2 !important;
+    
+}
+.main_menu .main-menu-item ul li .nav-link {
+    color: #2e2e2e;
+}
+.main_menu .main-menu-item ul li .nav-link:hover {
+    color: #C6402F !important;
+}
