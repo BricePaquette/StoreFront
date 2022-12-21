@@ -1,24 +1,24 @@
 ﻿.breadcrumb_part {
-    background-color: #C6402F;
+    background-color: #A70C1C;
 }
 
 .btn_1 {
-    background-color: #C6402F;
-    border: 2px solid #C6402F;
+    background-color: #A70C1C;
+    border: 2px solid #A70C1C;
 }
 
     .btn_1:hover {
         background-color: #FFF;
-        color: #C6402F;
+        color: #A70C1C;
     }
 
 .btn_3 {
-    color: #C6402F;
-    border: 2px solid #C6402F;
+    color: #A70C1C;
+    border: 2px solid #A70C1C;
 }
 
     .btn_3:hover {
-        background-color: #C6402F;
+        background-color: #A70C1C;
         color: #FFF;
     }
 
@@ -27,57 +27,57 @@ a {
 }
 
     a:hover {
-        color: #C6402F;
+        color: #A70C1C;
     }
 .footer_part .footer_iner .footer_menu_item a {
     color: #2e2e2e;
 }
 .footer_part .footer_iner .footer_menu_item a:hover {
-    color: #C6402F;
+    color: #A70C1C;
 }
 .banner_part:after {
-    background-color: #C6402F;
+    background-color: #A70C1C;
 }
 
 .dropdown .dropdown-menu {
-    background-color: #C6402F;
+    background-color: #A70C1C;
 }
 
     .dropdown .dropdown-menu .dropdown-item {
-        background-color: #C6402F;
+        background-color: #A70C1C;
     }
 
 .client_review {
-    background-color: #5A5144;
+    background-color: #2e2e2e;
 }
 
     .client_review .client_img:after {
-        background-color: #C6402F;
+        background-color: #A70C1C;
     }
 
     .client_review .owl-nav button.owl-prev, .client_review .owl-nav button.owl-next {
-        border: 1px solid #C6402F;
-        color: #C6402F;
+        border: 1px solid #A70C1C;
+        color: #A70C1C;
     }
 
         .client_review .owl-nav button.owl-prev:hover, .client_review .owl-nav button.owl-next:hover {
-            background-color: #C6402F;
+            background-color: #A70C1C;
         }
 
 .product_sidebar .single_sedebar input {
-    background-color: #c2c2c2;
-    border: 1px solid #c2c2c2;
-    color: #555;
+    background-color: #2e2e2e;
+    border: 1px solid #2e2e2e;
+    color: #fff;
 }
 
     .product_sidebar .single_sedebar input::placeholder {
-        color: #555;
+        color: #fff;
     }
 
 .select_option .select_option_list {
-    background-color: #c2c2c2;
-    border: 1px solid #c2c2c2;
-    color: #555;
+    background-color: #2e2e2e;
+    border: 1px solid #2e2e2e;
+    color: #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
@@ -87,8 +87,8 @@ a {
     object-fit: contain;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #c2c2c2;
-    border-color: #c2c2c2;
+    background-color: #2e2e2e;
+    border-color: #2e2e2e;
 }
 
 p{
@@ -102,5 +102,64 @@ p{
     color: #2e2e2e;
 }
 .main_menu .main-menu-item ul li .nav-link:hover {
-    color: #C6402F !important;
+    color: #A70C1C !important;
 }
+
+.btn-link {
+    color: #2e2e2e;
+}
+    .btn-link:hover {
+        color: #A70C1C;
+        text-decoration: none;
+    }
+.footer_part .copyright_part {
+    background-color: #2e2e2e;
+    
+}
+.footer_part .copyright_part {
+    background-color: #2e2e2e;
+    color: #fff;
+}
+ div.copyright_text p{
+        color: #fff !important;
+    }
+        .footer_part .copyright_part .copyright_text p a {
+            color: #fff;
+        }
+        .footer_part .copyright_part .copyright_text p a:hover {
+            color: #A70C1C;
+        }
+/*.dataTables_wrapper .dataTables_paginate .paginate_button.current{
+    background: none;
+    background-color: #2e2e2e;
+
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+    background-color: #A70C1C;
+}
+.container .dataTables_paginate .paging_simple_numbers .dataTables_wrapper .dataTables_paginate .paginate_button.current a {*/
+    /*color: #fff !important;*/
+    /*color: unset #fff;
+}*/
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #2e2e2e;
+    border-color: #2e2e2e;
+}
+    .page-item.active .page-link:hover {
+        color: #fff;
+        background-color: #A70C1C;
+        border-color: #A70C1C;
+    }
+
+iframe.google {
+    width: 50vw;
+    height: 33vh;
+}
+.page-link {
+    color: #2e2e2e;
+}
+    .page-link:hover {
+        color: #A70C1C;
+    }
